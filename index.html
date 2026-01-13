@@ -42,11 +42,47 @@
 <html>
 <body>
 
-<p id="text">Hallo 🤑🤑</p>
+	<!DOCTYPE html>
+<html lang="de">
+<body>
 
-<button onclick="document.getElementById('text').innerHTML='Tschüss☹️☹️'">
-Klick mich
-</button>
+<h3>Reaktionszeit-Test</h3>
+
+<p id="text">Klicke auf Start</p>
+<button onclick="start()">Start</button>
+<button onclick="klick()">Klick!</button>
+
+<p id="zeit"></p>
+
+<script>
+    let startZeit = 0;
+    let bereit = false;
+
+    function start() {
+        document.getElementById("text").innerHTML = "Warten...";
+        document.getElementById("zeit").innerHTML = "";
+        bereit = false;
+
+        setTimeout(() => {
+            document.getElementById("text").innerHTML = "JETZT!";
+            startZeit = Date.now();
+            bereit = true;
+        }, Math.random() * 3000 + 1000);
+    }
+
+    function klick() {
+        if (!bereit) {
+            document.getElementById("zeit").innerHTML =
+                "Zu früh!";
+            return;
+        }
+
+        let reaktion = Date.now() - startZeit;
+        document.getElementById("zeit").innerHTML =
+            "Reaktionszeit: " + reaktion + " ms";
+        bereit = false;
+    }
+</script>
 
 </body>
 </html>
