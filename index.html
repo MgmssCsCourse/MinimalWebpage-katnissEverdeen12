@@ -40,14 +40,27 @@
 </button>
 <!DOCTYPE html>
 <html>
-<body>
 
+	<!DOCTYPE html>
+<html lang="de">
+<body style="text-align:center; font-family:Arial;">
 
-</html>
-<!DOCTYPE html>
-<html>
-<body>
-<p>Test</p>
-<button onclick="alert('OK')">Test</button>
+<h2>Klick-Spiel</h2>
+
+<p>Punkte: <span id="punkte">0</span></p>
+
+<button onclick="plus()">Klick mich!</button>
+
+<script>
+    let punkte = 0;
+
+    function plus() {
+        punkte++;
+        document.getElementById("punkte").innerHTML = punkte;
+    }
+</script>
+
 </body>
 </html>
+
+
