@@ -32,3 +32,65 @@
         background: linear-gradient(orange, green);
     }
 </style>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Interaktiver Verlauf</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(90deg, orange, green);
+        min-height: 100vh;
+        margin: 0;
+        transition: background 0.3s;
+    }
+
+    .controls {
+        background: white;
+        padding: 20px;
+        margin: 20px auto;
+        width: 300px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+</style>
+</head>
+
+<body>
+
+<div class="controls">
+    <h3>Farbverlauf steuern</h3>
+
+    <label>Farbe 1:</label><br>
+    <input type="color" id="color1" value="#ff0000"><br><br>
+
+    <label>Farbe 2:</label><br>
+    <input type="color" id="color2" value="#0000ff"><br><br>
+
+    <label>Richtung:</label><br>
+    <input type="range" id="angle" min="0" max="360" value="90">
+    <p><span id="angleValue">90</span>°</p>
+</div>
+
+<script>
+    const color1 = document.getElementById("color1");
+    const color2 = document.getElementById("color2");
+    const angle = document.getElementById("angle");
+    const angleValue = document.getElementById("angleValue");
+
+    function updateGradient() {
+        document.body.style.background =
+            `linear-gradient(${angle.value}deg, ${color1.value}, ${color2.value})`;
+        angleValue.textContent = angle.value;
+    }
+
+    color1.addEventListener("input", updateGradient);
+    color2.addEventListener("input", updateGradient);
+    angle.addEventListener("input", updateGradient);
+</script>
+
+</body>
+</html>
