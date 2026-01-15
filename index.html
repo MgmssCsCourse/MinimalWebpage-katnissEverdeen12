@@ -72,4 +72,84 @@
     document.getElementById("count").innerText = counter;
   }
 </script>
+<div id="game">
+  <div id="player"></div>
+  <div id="block"></div>
+</div>
+<p>Punkte: <span id="score">0</span></p>
 
+<style>
+  #game {
+    width: 400px;
+    height: 200px;
+    border: 2px solid black;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #player {
+    width: 30px;
+    height: 30px;
+    background: blue;
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+  }
+
+  #block {
+    width: 30px;
+    height: 30px;
+    background: red;
+    position: absolute;
+    bottom: 0;
+    right: -30px;
+    animation: move 2s linear infinite;
+  }
+
+  @keyframes move {
+    from { right: -30px; }
+    to { right: 400px; }
+  }
+
+  .jump {
+    animation: jump 0.5s;
+  }
+
+  @keyframes jump {
+    0% { bottom: 0; }
+    50% { bottom: 80px; }
+    100% { bottom: 0; }
+  }
+</style>
+
+<script>
+  const player = document.getElementById("player");
+  const block = document.getElementById("block");
+  const scoreEl = document.getElementById("score");
+  let score = 0;
+
+  document.addEventListener("keydown", jump);
+
+  function jump() {
+    if (!player.classList.contains("jump")) {
+      player.classList.add("jump");
+      setTimeout(() => {
+        player.classList.remove("jump");
+      }, 500);
+    }
+  }
+
+  setInterval(() => {
+    let playerBottom = parseInt(getComputedStyle(player).bottom);
+    let blockRight = parseInt(getComputedStyle(block).right);
+
+    if (blockRight > 320 && blockRight < 360 && playerBottom < 30) {
+      alert("Game Over! Punkte: " + score);
+      score = 0;
+      scoreEl.textContent = score;
+    } else {
+      score++;
+      scoreEl.textContent = score;
+    }
+  }, 100);
+</script>
